@@ -67,10 +67,10 @@ const About = () => {
         <section className="py-24 bg-muted">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
-              <span className="section-label-hero">Leadership</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Our Leadership</h2>
+              <span className="section-label-hero">Our Team</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Leadership Team</h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Under the visionary guidance of our leaders, we blend entrepreneurial drive with operational excellence.
+                Meet the experienced professionals who guide our vision and strategy with decades of combined experience in banking and finance.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
@@ -79,14 +79,20 @@ const About = () => {
                   <span className="text-2xl font-bold text-primary">AP</span>
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">Abhishekraje Paul</h3>
-                <p className="text-sm text-muted-foreground">Chairman</p>
+                <p className="text-sm font-medium text-primary">Chairman</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Visionary leader driving entrepreneurial growth and operational excellence to serve our community effectively.
+                </p>
               </div>
               <div className="feature-card text-center">
                 <div className="mb-4 mx-auto inline-flex items-center justify-center rounded-full bg-primary/10 h-20 w-20">
                   <span className="text-2xl font-bold text-primary">GS</span>
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">Gajanan Shinde</h3>
-                <p className="text-sm text-muted-foreground">CEO</p>
+                <p className="text-sm font-medium text-primary">CEO</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Committed to driving innovation and excellence in customer service with years of experience in banking and finance.
+                </p>
               </div>
             </div>
           </div>
