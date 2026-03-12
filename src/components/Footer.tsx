@@ -15,6 +15,14 @@ const Footer = () => {
             <p className="text-sm text-primary-foreground/70">
               Rayat Seva Urban Co-op Credit Society Ltd., Pathri. Empowering Dreams, Building Futures.
             </p>
+            <div className="flex gap-4 mt-4">
+              <a href="https://facebook.com/RayatSevaUrban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="https://instagram.com/Rayatseva_urban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           <div>
@@ -25,6 +33,17 @@ const Footer = () => {
               <li><Link to="/loans" className="hover:text-primary-foreground">Loans</Link></li>
               <li><Link to="/deposits" className="hover:text-primary-foreground">Deposits</Link></li>
               <li><Link to="/contact" className="hover:text-primary-foreground">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2 text-sm text-primary-foreground/70">
+              <li><Link to="/terms" className="hover:text-primary-foreground">Terms & Conditions</Link></li>
+              <li><Link to="/privacy" className="hover:text-primary-foreground">Privacy Policy</Link></li>
+              <li><Link to="/cookies" className="hover:text-primary-foreground">Cookie Policy</Link></li>
+              <li><Link to="/disclaimer" className="hover:text-primary-foreground">Disclaimer</Link></li>
+              <li><Link to="/regulatory" className="hover:text-primary-foreground">Regulatory Information</Link></li>
             </ul>
           </div>
 
@@ -48,18 +67,6 @@ const Footer = () => {
                 <a href="mailto:Rayatsevaurban@gmail.com" className="hover:text-primary-foreground">Rayatsevaurban@gmail.com</a>
               </li>
             </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold mb-4">Follow Us</h3>
-            <div className="flex gap-4">
-              <a href="https://instagram.com/Rayatseva_urban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="https://facebook.com/RayatSevaUrban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
-                <Facebook className="h-5 w-5" />
-              </a>
-            </div>
           </div>
         </div>
 

@@ -1,53 +1,74 @@
-import { Home, User, Briefcase, Car, GraduationCap, Gem } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Home, User, Briefcase, Car, GraduationCap, Gem, Building, Landmark } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const loanTypes = [
+  {
+    icon: Gem,
+    title: "Gold Loan",
+    description: "Unlock the value of your gold assets with instant loans at attractive interest rates. Enjoy quick processing, minimal paperwork, and flexible repayment options.",
+    rate: "9.5%",
+    maxAmount: "₹10,00,000",
+    tenure: "Up to 1 year",
+  },
+  {
+    icon: Briefcase,
+    title: "Business Loan",
+    description: "Fuel your business growth with our flexible business loans. Benefit from competitive interest rates, fast approvals, and tailored repayment plans.",
+    rate: "11%",
+    maxAmount: "₹10,00,000",
+    tenure: "Up to 5 years",
+  },
+  {
+    icon: User,
+    title: "Personal Loan",
+    description: "Quick personal loans for your immediate needs with minimal documentation.",
+    rate: "12%",
+    maxAmount: "₹5,00,000",
+    tenure: "Up to 5 years",
+  },
   {
     icon: Home,
     title: "Home Loan",
     description: "Make your dream home a reality with our affordable home loans.",
     rate: "10.5%",
     maxAmount: "₹25,00,000",
+    tenure: "Up to 20 years",
   },
   {
-    icon: User,
-    title: "Personal Loan",
-    description: "Quick personal loans for your immediate financial needs.",
-    rate: "12%",
-    maxAmount: "₹5,00,000",
+    icon: Landmark,
+    title: "Loan Against Fixed Deposit",
+    description: "Get instant liquidity against your fixed deposits with low interest rates and flexible repayment options. Ideal for emergencies or planned expenses.",
+    rate: "9%",
+    maxAmount: "₹20,00,000",
+    tenure: "Depending upon FD tenure",
   },
   {
-    icon: Briefcase,
-    title: "Business Loan",
-    description: "Fuel your business growth with our flexible business loans.",
-    rate: "11%",
-    maxAmount: "₹10,00,000",
-  },
-  {
-    icon: Car,
-    title: "Vehicle Loan",
-    description: "Drive your dream vehicle home with our easy vehicle loans.",
-    rate: "11.5%",
-    maxAmount: "₹8,00,000",
-  },
-  {
-    icon: GraduationCap,
-    title: "Education Loan",
-    description: "Invest in your future with our education loan schemes.",
-    rate: "10%",
-    maxAmount: "₹5,00,000",
-  },
-  {
-    icon: Gem,
-    title: "Gold Loan",
-    description: "Get instant funds against your gold at attractive interest rates.",
-    rate: "9.5%",
-    maxAmount: "₹10,00,000",
+    icon: Building,
+    title: "Loan Against Property",
+    description: "Leverage your property to secure funds for business expansion, education, or personal needs. Enjoy low interest rates and flexible repayment terms.",
+    rate: "10.5%",
+    maxAmount: "₹20,00,000",
+    tenure: "Up to 5 years",
   },
 ];
 
 const Loans = () => {
+  const [loanAmount, setLoanAmount] = useState(500000);
+  const [interestRate, setInterestRate] = useState(10);
+  const [loanTenure, setLoanTenure] = useState(12);
+
+  const monthlyRate = interestRate / 12 / 100;
+  const emi = monthlyRate > 0
+    ? (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTenure)) / (Math.pow(1 + monthlyRate, loanTenure) - 1)
+    : loanAmount / loanTenure;
+  const totalAmount = emi * loanTenure;
+  const totalInterest = totalAmount - loanAmount;
+
+  const formatCurrency = (val: number) => "₹" + Math.round(val).toLocaleString("en-IN");
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -113,18 +134,116 @@ const Loans = () => {
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">{loan.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{loan.description}</p>
-                  <div className="mt-4 flex justify-between items-center pt-4 border-t">
+                  <div className="mt-4 grid grid-cols-3 gap-2 pt-4 border-t">
                     <div>
                       <p className="text-xs text-muted-foreground">Interest Rate</p>
                       <p className="text-sm font-semibold text-primary">{loan.rate} p.a.</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-xs text-muted-foreground">Up to</p>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Max Amount</p>
                       <p className="text-sm font-semibold text-foreground">{loan.maxAmount}</p>
                     </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Tenure</p>
+                      <p className="text-sm font-semibold text-foreground">{loan.tenure}</p>
+                    </div>
                   </div>
+                  <Link to="/contact" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
+                    Learn more →
+                  </Link>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* EMI Calculator */}
+        <section className="py-24 bg-muted">
+          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-1 w-12 bg-primary rounded" />
+              <span className="text-lg font-bold text-primary">EMI Calculator</span>
+            </div>
+            <p className="text-muted-foreground mb-10">
+              Calculate your monthly EMI based on your loan amount, interest rate, and tenure.
+            </p>
+
+            <div className="space-y-8">
+              {/* Loan Amount */}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Loan Amount: {formatCurrency(loanAmount)}
+                </label>
+                <input
+                  type="range"
+                  min={10000}
+                  max={1000000}
+                  step={10000}
+                  value={loanAmount}
+                  onChange={(e) => setLoanAmount(Number(e.target.value))}
+                  className="w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>₹10,000</span>
+                  <span>₹10 Lakh</span>
+                </div>
+              </div>
+
+              {/* Interest Rate */}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Interest Rate: {interestRate}% p.a.
+                </label>
+                <input
+                  type="range"
+                  min={5}
+                  max={20}
+                  step={0.5}
+                  value={interestRate}
+                  onChange={(e) => setInterestRate(Number(e.target.value))}
+                  className="w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>5%</span>
+                  <span>20%</span>
+                </div>
+              </div>
+
+              {/* Loan Tenure */}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Loan Tenure: {loanTenure} months
+                </label>
+                <input
+                  type="range"
+                  min={1}
+                  max={240}
+                  step={1}
+                  value={loanTenure}
+                  onChange={(e) => setLoanTenure(Number(e.target.value))}
+                  className="w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>1 month</span>
+                  <span>20 years</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="rounded-2xl bg-primary p-6 text-center">
+                <p className="text-sm text-primary-foreground/80">Monthly EMI</p>
+                <p className="text-2xl font-bold text-primary-foreground">{formatCurrency(emi)}</p>
+              </div>
+              <div className="rounded-2xl border bg-card p-6 text-center">
+                <p className="text-sm text-muted-foreground">Total Interest</p>
+                <p className="text-2xl font-bold text-foreground">{formatCurrency(totalInterest)}</p>
+              </div>
+              <div className="rounded-2xl border bg-card p-6 text-center">
+                <p className="text-sm text-muted-foreground">Total Amount</p>
+                <p className="text-2xl font-bold text-foreground">{formatCurrency(totalAmount)}</p>
+              </div>
             </div>
           </div>
         </section>

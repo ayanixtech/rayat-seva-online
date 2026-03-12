@@ -8,6 +8,11 @@ import About from "./pages/About.tsx";
 import Loans from "./pages/Loans.tsx";
 import Deposits from "./pages/Deposits.tsx";
 import Contact from "./pages/Contact.tsx";
+import TermsAndConditions from "./pages/TermsAndConditions.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Disclaimer from "./pages/Disclaimer.tsx";
+import RegulatoryInfo from "./pages/RegulatoryInfo.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +29,11 @@ const App = () => (
           <Route path="/loans" element={<Loans />} />
           <Route path="/deposits" element={<Deposits />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/regulatory" element={<RegulatoryInfo />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

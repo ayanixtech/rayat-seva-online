@@ -1,22 +1,76 @@
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const depositSchemes = [
+const depositPlans = [
   {
-    title: "Monthly Deposit Scheme (15 Months)",
-    rows: [
-      { monthly: "₹1,000", months: 15, total: "₹15,000", maturity: "₹16,000", interest: "₹1,000" },
-      { monthly: "₹2,000", months: 15, total: "₹30,000", maturity: "₹32,000", interest: "₹2,000" },
-      { monthly: "₹3,000", months: 15, total: "₹45,000", maturity: "₹48,000", interest: "₹3,000" },
-      { monthly: "₹5,000", months: 15, total: "₹75,000", maturity: "₹80,000", interest: "₹5,000" },
+    title: "Fixed Deposit",
+    description: "Earn guaranteed returns with our fixed deposit schemes. Choose from flexible tenures and competitive interest rates.",
+    rate: "Up to 8.50% p.a.",
+    minAmount: "₹10,000",
+    duration: "6 months to 10 years",
+    features: [
+      "Higher interest rates for senior citizens",
+      "Auto-renewal facility available",
+      "Loan facility against FD",
+      "Monthly interest payout option",
+      "Premature withdrawal facility",
     ],
   },
   {
-    title: "Monthly Deposit Scheme (24 Months)",
-    rows: [
-      { monthly: "₹1,000", months: 24, total: "₹24,000", maturity: "₹27,000", interest: "₹3,000" },
-      { monthly: "₹2,000", months: 24, total: "₹48,000", maturity: "₹54,000", interest: "₹6,000" },
-      { monthly: "₹5,000", months: 24, total: "₹1,20,000", maturity: "₹1,35,000", interest: "₹15,000" },
+    title: "Recurring Deposit",
+    description: "Build your savings with regular monthly deposits. Perfect for achieving your financial goals.",
+    rate: "Up to 9.00% p.a.",
+    minAmount: "₹500/month",
+    duration: "12 months to 10 years",
+    features: [
+      "Flexible monthly deposit amounts",
+      "Standing instruction facility",
+      "Higher returns than savings account",
+      "Goal-based savings plan",
+      "Partial withdrawal facility",
+    ],
+  },
+  {
+    title: "Monthly Income Scheme (MIS)",
+    description: "Enjoy a steady monthly income with our MIS. Invest a lump sum and receive regular interest payouts, making it ideal for retirees and those seeking predictable returns.",
+    rate: "Up to 8.5% p.a.",
+    minAmount: "₹1,00,000",
+    duration: "from 1 year (lock-in)",
+    features: [
+      "Guaranteed monthly interest payouts",
+      "Ideal for retirees and fixed income seekers",
+      "No market risk, principal is safe",
+      "Flexible investment amount options",
+      "Easy nomination and transfer facility",
+    ],
+  },
+  {
+    title: "Senior Citizen Fixed Deposit",
+    description: "Special fixed deposit scheme for senior citizens with higher interest rates and additional benefits.",
+    rate: "Up to 9.00% p.a.",
+    minAmount: "₹1,00,000",
+    duration: "1 year to 10 years",
+    features: [
+      "Additional 0.50% interest rate",
+      "Monthly interest payout option",
+      "Nomination facility",
+      "Auto-renewal facility",
+      "Doorstep banking services",
+    ],
+  },
+  {
+    title: "Daily Deposit (Pigmy)",
+    description: "Grow your savings with small daily deposits collected at your doorstep. Ideal for individuals and small businesses looking for disciplined savings and easy liquidity.",
+    rate: "0.00% p.a.",
+    minAmount: "₹100/day",
+    duration: "Flexible tenure",
+    features: [
+      "Daily doorstep collection",
+      "Flexible deposit amounts",
+      "Easy withdrawal facility",
+      "Doorstep withdrawal option",
+      "Suitable for traders and small businesses",
     ],
   },
 ];
@@ -50,7 +104,7 @@ const Deposits = () => {
           </div>
         </div>
 
-        {/* Deposit Tables */}
+        {/* Deposit Plans */}
         <section className="py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mb-16">
@@ -64,38 +118,60 @@ const Deposits = () => {
               </p>
             </div>
 
-            <div className="space-y-12">
-              {depositSchemes.map((scheme) => (
-                <div key={scheme.title} className="feature-card overflow-hidden p-0">
-                  <div className="bg-primary/5 px-6 py-4 border-b">
-                    <h3 className="text-lg font-semibold text-foreground">{scheme.title}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {depositPlans.map((plan) => (
+                <div key={plan.title} className="feature-card flex flex-col">
+                  <h3 className="text-lg font-semibold text-foreground">{plan.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{plan.description}</p>
+
+                  <div className="mt-4 p-3 rounded-lg bg-primary/5">
+                    <p className="text-xs text-muted-foreground">Interest Rate</p>
+                    <p className="text-lg font-bold text-primary">{plan.rate}</p>
                   </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b bg-muted/50">
-                          <th className="px-6 py-3 text-left font-medium text-muted-foreground">Monthly Deposit</th>
-                          <th className="px-6 py-3 text-left font-medium text-muted-foreground">Months</th>
-                          <th className="px-6 py-3 text-left font-medium text-muted-foreground">Total Deposit</th>
-                          <th className="px-6 py-3 text-left font-medium text-muted-foreground">Maturity Amount</th>
-                          <th className="px-6 py-3 text-left font-medium text-muted-foreground">Interest Earned</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {scheme.rows.map((row, idx) => (
-                          <tr key={idx} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
-                            <td className="px-6 py-4 font-medium text-foreground">{row.monthly}</td>
-                            <td className="px-6 py-4 text-muted-foreground">{row.months}</td>
-                            <td className="px-6 py-4 text-muted-foreground">{row.total}</td>
-                            <td className="px-6 py-4 font-semibold text-primary">{row.maturity}</td>
-                            <td className="px-6 py-4 text-accent-foreground font-medium">{row.interest}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Min Amount</p>
+                      <p className="text-sm font-semibold text-foreground">{plan.minAmount}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Duration</p>
+                      <p className="text-sm font-semibold text-foreground">{plan.duration}</p>
+                    </div>
                   </div>
+
+                  <div className="mt-4 pt-4 border-t flex-grow">
+                    <p className="text-xs font-semibold text-foreground mb-2">Features</p>
+                    <ul className="space-y-1.5">
+                      {plan.features.map((f, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-0.5">→</span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Link to="/contact" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
+                    Learn More →
+                  </Link>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="hero-gradient py-16">
+          <div className="mx-auto max-w-4xl text-center px-6">
+            <h2 className="text-2xl font-bold text-primary-foreground sm:text-3xl">
+              Looking for something specific?
+            </h2>
+            <p className="mt-4 text-blue-100">
+              Our financial experts are here to help you choose the right deposit product.
+            </p>
+            <div className="mt-8">
+              <Link to="/contact" className="btn-primary">Contact Us</Link>
             </div>
           </div>
         </section>

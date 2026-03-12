@@ -1,29 +1,38 @@
 import { Link } from "react-router-dom";
-import { Shield, Users, TrendingUp, Landmark, ArrowRight } from "lucide-react";
+import { Shield, Users, TrendingUp, Landmark, ArrowRight, Smartphone, Home, CreditCard, Send, Zap, FileText } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const features = [
   {
-    icon: Shield,
-    title: "Secure Deposits",
-    description: "Your savings are safe with us. We offer competitive interest rates on all deposit schemes.",
+    icon: Users,
+    title: "Personal Loans",
+    description: "Quick and hassle-free personal loans with competitive interest rates.",
   },
   {
-    icon: Users,
-    title: "Women Empowerment",
-    description: "Tailored financial products that promote independence and entrepreneurship for women.",
+    icon: Shield,
+    title: "Fixed Deposits",
+    description: "Secure your future with our high-yield fixed deposit schemes.",
   },
   {
     icon: TrendingUp,
-    title: "Easy Loans",
-    description: "Quick loan processing with minimal documentation. Get funds when you need them most.",
+    title: "Savings Account",
+    description: "Start your savings journey with our feature-rich savings accounts.",
   },
   {
     icon: Landmark,
     title: "SME Support",
     description: "Growth-oriented loans fostering local business expansion and job creation.",
   },
+];
+
+const bankingServices = [
+  { icon: Smartphone, title: "Mobile Banking", description: "Bank on the go with our secure mobile banking app" },
+  { icon: Home, title: "Doorstep Banking", description: "Banking services delivered right to your doorstep" },
+  { icon: Send, title: "NEFT", description: "National Electronic Funds Transfer for seamless money transfers" },
+  { icon: CreditCard, title: "RTGS", description: "Real-Time Gross Settlement for instant high-value transfers" },
+  { icon: Zap, title: "IMPS", description: "Immediate Payment Service for instant fund transfers 24/7" },
+  { icon: FileText, title: "Demand Draft", description: "Quick and reliable demand draft issuance services" },
 ];
 
 const Index = () => {
@@ -83,6 +92,32 @@ const Index = () => {
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Banking Services */}
+        <section className="py-24 bg-muted">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="section-label-hero">Banking Services</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Everything you need for your banking needs
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Access a wide range of banking services designed to make your financial transactions smooth and convenient.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {bankingServices.map((service) => (
+                <div key={service.title} className="feature-card">
+                  <div className="mb-4 inline-flex items-center justify-center rounded-lg bg-primary/10 p-3">
+                    <service.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">{service.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{service.description}</p>
                 </div>
               ))}
             </div>
