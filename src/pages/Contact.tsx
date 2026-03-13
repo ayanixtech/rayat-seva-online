@@ -40,6 +40,7 @@ const Contact = () => {
         email: formData.get("email"),
         phone: formData.get("phone"),
         message: formData.get("message"),
+        to_email: CONTACT_RECEIVER_EMAIL,
       },
     };
 
