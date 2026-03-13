@@ -1,35 +1,55 @@
 import { useState, useRef } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const EMAILJS_SERVICE_ID = "service_rayatseva";
+const EMAILJS_TEMPLATE_ID = "template_rayatseva";
+const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     setSending(true);
-    emailjs
-      .sendForm(
-        "service_rayatseva",
-        "template_rayatseva",
-        formRef.current,
-        "YOUR_EMAILJS_PUBLIC_KEY"
-      )
-      .then(() => {
+
+    const formData = new FormData(formRef.current);
+    const data = {
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      template_params: {
+        first_name: formData.get("first_name"),
+        last_name: formData.get("last_name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message"),
+      },
+    };
+
+    try {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
         toast({ title: "Message sent!", description: "We'll get back to you soon." });
         formRef.current?.reset();
-      })
-      .catch(() => {
-        toast({ title: "Failed to send", description: "Please try again or call us directly.", variant: "destructive" });
-      })
-      .finally(() => setSending(false));
+      } else {
+        throw new Error("Failed");
+      }
+    } catch {
+      toast({ title: "Failed to send", description: "Please try again or call us directly.", variant: "destructive" });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -39,7 +59,6 @@ const Contact = () => {
         <section className="py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Info */}
               <div>
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Get in touch</h1>
                 <p className="mt-4 text-lg text-muted-foreground">
@@ -77,7 +96,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Form */}
               <div>
                 <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
