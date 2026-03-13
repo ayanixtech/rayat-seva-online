@@ -4,9 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const EMAILJS_SERVICE_ID = "service_rayatseva";
-const EMAILJS_TEMPLATE_ID = "template_rayatseva";
-const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_rayatseva";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_rayatseva";
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+const CONTACT_RECEIVER_EMAIL = "rayatsevaurban@gmail.com";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
