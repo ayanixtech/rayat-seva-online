@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img src={logo} alt="Rayat Seva Urban" className="h-10 w-10 rounded-full object-cover" />
-              <span className="font-bold">रयत सेवा अर्बन</span>
+              <span className="font-bold font-marathi">रयत सेवा अर्बन</span>
             </div>
             <p className="text-sm text-primary-foreground/70">
               Rayat Seva Urban Co-op Credit Society Ltd., Pathri. Empowering Dreams, Building Futures.
@@ -64,7 +64,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0" />
-                <a href="mailto:Rayatsevaurban@gmail.com" className="hover:text-primary-foreground">Rayatsevaurban@gmail.com</a>
+                <a href="mailto:rayatsevaurban@gmail.com" className="hover:text-primary-foreground">rayatsevaurban@gmail.com</a>
               </li>
             </ul>
           </div>
