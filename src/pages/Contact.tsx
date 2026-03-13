@@ -1,8 +1,37 @@
+import { useState, useRef } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setSending(true);
+    emailjs
+      .sendForm(
+        "service_rayatseva",
+        "template_rayatseva",
+        formRef.current,
+        "YOUR_EMAILJS_PUBLIC_KEY"
+      )
+      .then(() => {
+        toast({ title: "Message sent!", description: "We'll get back to you soon." });
+        formRef.current?.reset();
+      })
+      .catch(() => {
+        toast({ title: "Failed to send", description: "Please try again or call us directly.", variant: "destructive" });
+      })
+      .finally(() => setSending(false));
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -42,7 +71,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold text-foreground">Email</h3>
                       <p className="text-sm text-muted-foreground mt-1">Our support team is here to help</p>
-                      <a href="mailto:Rayatsevaurban@gmail.com" className="text-sm text-primary hover:underline">Rayatsevaurban@gmail.com</a>
+                      <a href="mailto:rayatsevaurban@gmail.com" className="text-sm text-primary hover:underline">rayatsevaurban@gmail.com</a>
                     </div>
                   </div>
                 </div>
@@ -50,31 +79,33 @@ const Contact = () => {
 
               {/* Form */}
               <div>
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-1">First name</label>
-                      <input type="text" className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <input name="first_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-1">Last name</label>
-                      <input type="text" className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <input name="last_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1">Email</label>
-                    <input type="email" className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                    <input name="email" type="email" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1">Phone number</label>
-                    <input type="tel" className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                    <input name="phone" type="tel" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1">Message</label>
-                    <textarea rows={4} className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                    <textarea name="message" rows={4} required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                   </div>
                   <div className="flex justify-end">
-                    <button type="submit" className="btn-primary">Send message</button>
+                    <button type="submit" disabled={sending} className="btn-primary disabled:opacity-50">
+                      {sending ? "Sending..." : "Send message"}
+                    </button>
                   </div>
                 </form>
               </div>
