@@ -18,6 +18,15 @@ const Contact = () => {
     e.preventDefault();
     if (!formRef.current) return;
 
+    if (!EMAILJS_PUBLIC_KEY) {
+      toast({
+        title: "Email setup pending",
+        description: "Please add your EmailJS public key in VITE_EMAILJS_PUBLIC_KEY.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSending(true);
 
     const formData = new FormData(formRef.current);
