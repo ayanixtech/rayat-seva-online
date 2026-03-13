@@ -4,9 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const EMAILJS_SERVICE_ID = "service_rayatseva";
-const EMAILJS_TEMPLATE_ID = "template_rayatseva";
-const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_rayatseva";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_rayatseva";
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+const CONTACT_RECEIVER_EMAIL = "rayatsevaurban@gmail.com";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -16,6 +17,15 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
+
+    if (!EMAILJS_PUBLIC_KEY) {
+      toast({
+        title: "Email setup pending",
+        description: "Please add your EmailJS public key in VITE_EMAILJS_PUBLIC_KEY.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     setSending(true);
 
@@ -30,6 +40,7 @@ const Contact = () => {
         email: formData.get("email"),
         phone: formData.get("phone"),
         message: formData.get("message"),
+        to_email: CONTACT_RECEIVER_EMAIL,
       },
     };
 
