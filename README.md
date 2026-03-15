@@ -1,73 +1,25 @@
-# Welcome to your Lovable project
+# Rayat Seva Urban Co-op Credit Society Ltd., Pathri
 
-## Project info
+Official website for Rayat Seva Urban Co-op Credit Society Ltd., Pathri, Maharashtra.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## About
 
-## How can I edit this code?
+Empowering Dreams, Building Futures — Your trusted partner in financial growth.
 
-There are several ways of editing your application.
+## Services
 
-**Use Lovable**
+- **Loans**: Personal, Business, Agriculture, Gold, Education, Home loans
+- **Deposits**: Fixed Deposit, Recurring Deposit, Savings Account, Daily Deposit
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Contact
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Address**: Beside Rayat Seva School, Netaji Subhash Colony, Pathri, Dist.- Parbhani, Maharashtra - 431506
+- **Phone**: +91 8805612797 / +91 9156114870
+- **Email**: rayatsevaurban@gmail.com
 
-**Use your preferred IDE**
+## Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
+- React + TypeScript
 - Vite
-- TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- shadcn/ui
