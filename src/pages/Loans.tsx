@@ -104,7 +104,7 @@ const Loans = () => {
         <section className="py-16 bg-accent/10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
             <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-              १ लाख रुपये कर्जासाठी फक्त ₹10 दैनिक व्याज दराने!
+              १ लाख रुपये कर्जासाठी फक्त 10000 रु वार्षिक व्याज!
             </h2>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
               महिला सबलीकरण व उद्योजकतेला प्रोत्साहन देण्यासाठी विशेष कर्ज योजना उपलब्ध.
