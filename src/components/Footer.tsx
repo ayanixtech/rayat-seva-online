@@ -16,7 +16,7 @@ const Footer = () => {
               Rayat Seva Urban Co-op Credit Society Ltd., Pathri. Empowering Dreams, Building Futures.
             </p>
             <div className="flex gap-4 mt-4">
-              <a href="https://facebook.com/RayatSevaUrban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
+              <a href="https://www.facebook.com/share/1H36UHsZWB/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
                 <Facebook className="h-5 w-5" />
               </a>
               <a href="https://instagram.com/Rayatseva_urban" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">

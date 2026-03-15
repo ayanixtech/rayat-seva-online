@@ -21,7 +21,9 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Rayat Seva Urban" className="h-10 w-10 rounded-full object-cover" />
-            <span className="text-lg font-bold text-accent font-marathi">रयत सेवा अर्बन को-ऑप क्रेडिट सोसायटी, पाथरी</span>
+            <span className="text-lg font-extrabold text-accent font-marathi tracking-wide" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.08)' }}>
+              रयत सेवा अर्बन को-ऑप क्रेडिट सोसायटी, पाथरी
+            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

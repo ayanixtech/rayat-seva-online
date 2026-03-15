@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +13,7 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const Contact = () => {
     if (!EMAILJS_PUBLIC_KEY) {
       toast({
         title: "Email setup pending",
-        description: "Please add your EmailJS public key in VITE_EMAILJS_PUBLIC_KEY.",
+        description: "Please configure EmailJS credentials (VITE_EMAILJS_PUBLIC_KEY).",
         variant: "destructive",
       });
       return;
@@ -51,8 +52,9 @@ const Contact = () => {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        toast({ title: "Message sent!", description: "We'll get back to you soon." });
+        setSent(true);
         formRef.current?.reset();
+        setTimeout(() => setSent(false), 5000);
       } else {
         throw new Error("Failed");
       }
@@ -67,17 +69,17 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <section className="py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <section className="py-12 sm:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
               <div>
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Get in touch</h1>
-                <p className="mt-4 text-lg text-muted-foreground">
+                <p className="mt-4 text-base sm:text-lg text-muted-foreground">
                   Whether you have questions about our services or need assistance, our team is ready to help.
                 </p>
 
-                <div className="mt-10 space-y-8">
-                  <div className="flex gap-4 items-start p-6 rounded-xl border bg-card">
+                <div className="mt-8 sm:mt-10 space-y-6 sm:space-y-8">
+                  <div className="flex gap-4 items-start p-4 sm:p-6 rounded-xl border bg-card">
                     <MapPin className="h-6 w-6 text-primary shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-semibold text-foreground">Head Office</h3>
@@ -86,7 +88,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start p-6 rounded-xl border bg-card">
+                  <div className="flex gap-4 items-start p-4 sm:p-6 rounded-xl border bg-card">
                     <Phone className="h-6 w-6 text-primary shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-semibold text-foreground">Phone</h3>
@@ -96,7 +98,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start p-6 rounded-xl border bg-card">
+                  <div className="flex gap-4 items-start p-4 sm:p-6 rounded-xl border bg-card">
                     <Mail className="h-6 w-6 text-primary shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-semibold text-foreground">Email</h3>
@@ -108,35 +110,45 @@ const Contact = () => {
               </div>
 
               <div>
-                <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">First name</label>
-                      <input name="first_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                {sent ? (
+                  <div className="flex flex-col items-center justify-center h-full min-h-[350px] animate-fade-in">
+                    <div className="rounded-full bg-green-100 p-4 mb-4">
+                      <CheckCircle2 className="h-12 w-12 text-green-600 animate-scale-in" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">Message Sent!</h2>
+                    <p className="text-muted-foreground text-center max-w-xs">
+                      Thank you for reaching out. We'll get back to you soon.
+                    </p>
+                  </div>
+                ) : (
+                  <form ref={formRef} className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-1">First name</label>
+                        <input name="first_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-1">Last name</label>
+                        <input name="last_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">Last name</label>
-                      <input name="last_name" type="text" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-sm font-medium text-foreground mb-1">Email</label>
+                      <input name="email" type="email" required className="w-full rounded-md border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
                     </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">Email</label>
-                    <input name="email" type="email" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">Phone number</label>
-                    <input name="phone" type="tel" required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">Message</label>
-                    <textarea name="message" rows={4} required className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-                  </div>
-                  <div className="flex justify-end">
-                    <button type="submit" disabled={sending} className="btn-primary disabled:opacity-50">
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-1">Phone number</label>
+                      <input name="phone" type="tel" required className="w-full rounded-md border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-1">Message</label>
+                      <textarea name="message" rows={4} required className="w-full rounded-md border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
+                    </div>
+                    <button type="submit" disabled={sending} className="w-full btn-primary disabled:opacity-50 py-3 text-base">
                       {sending ? "Sending..." : "Send message"}
                     </button>
-                  </div>
-                </form>
+                  </form>
+                )}
               </div>
             </div>
           </div>

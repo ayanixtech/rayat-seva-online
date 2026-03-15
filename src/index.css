@@ -104,6 +104,6 @@
     @apply text-sm font-medium text-primary hover:text-primary/80 transition-colors;
   }
   .font-marathi {
-    font-family: 'Tiro Devanagari Marathi', 'Noto Sans Devanagari', 'Inter', sans-serif;
+    font-family: 'Baloo Devanagari 2', 'Noto Sans Devanagari', 'Tiro Devanagari Marathi', sans-serif;
   }
 }
